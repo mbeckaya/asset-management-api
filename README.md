@@ -18,7 +18,7 @@ System for managing company IT assets such as laptops, monitors, and other hardw
 
 | Feature | Status | Type |
 |---|---|---|
-| Asset CRUD API | ⏳ Planned | Core |
+| Asset CRUD API | ✅ Done | Core |
 | JWT Authentication | ⏳ Planned | Core |
 | Asset Assignment | ⏳ Planned | Core |
 | Asset Status Management | ⏳ Planned | Core |
@@ -32,3 +32,59 @@ System for managing company IT assets such as laptops, monitors, and other hardw
 🚧 Currently in early development.
 
 The project is being built step by step with a focus on clean architecture, maintainability, and scalability.
+
+## Base URL
+
+All endpoints are prefixed with:
+
+`/api/v1`
+
+---
+
+## Endpoints
+
+```http
+GET    /assets?page=1&limit=20
+GET    /assets/:id
+POST   /assets
+PUT    /assets/:id
+DELETE /assets/:id
+```
+
+## Query Parameters
+
+| Parameter | Type   | Description          |
+|------------|--------|----------------------|
+| page       | number | Current page number  |
+| limit      | number | Items per page       |
+
+---
+
+## Asset Model
+
+```json
+{
+  "id": 1,
+  "brand": "Lenovo",
+  "type": "Laptop",
+  "reseller": "Amazon",
+  "status": "In Use",
+  "purchasedAt": "2025-03-01",
+  "model": "Thinkpad 7420",
+  "serial": "SN-DL-001-7420",
+  "warrantyMonths": 36,
+  "price": 1299.99
+}
+```
+
+---
+
+## Status Codes
+
+| Code | Description         |
+|------|---------------------|
+| 200  | OK                  |
+| 201  | Created             |
+| 400  | Bad Request         |
+| 404  | Not Found           |
+| 500  | Internal Server Error |
