@@ -20,7 +20,7 @@ System for managing company IT assets such as laptops, monitors, and other hardw
 |---|---|---|
 | Asset CRUD API | ✅ Done | Core |
 | JWT Authentication | ✅ Done | Core |
-| Asset Assignment | ⏳ Planned | Core |
+| Asset Assignment | 🚧 In Progress | Core |
 | Asset Status Management | ⏳ Planned | Core |
 | Docker Setup | ⏳ Planned | Infrastructure |
 | Asset Filtering & Search | ⏳ Planned | Optional |
