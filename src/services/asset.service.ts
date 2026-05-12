@@ -1,5 +1,7 @@
 import BaseService from "./base.service";
-import type { AssetEntity, AssetView } from "../types/asset.type";
+import type { AssetEntity } from "../types/entity/asset-entity.type";
+import type { AssetView } from "../types/view/asset-view.type";
+import type { PaginationView } from "../types/view/pagination-view.type";
 
 export default class AssetService extends BaseService {
 
@@ -40,21 +42,23 @@ export default class AssetService extends BaseService {
         };
     }
 
-    async findAll(page: number, limit: number) {
+    async findAll(page: number, limit: number): Promise<PaginationView<AssetView[]>> {
         const offset = (page - 1) * limit;
 
-        const assets: AssetEntity[] = await this
+        const assets: AssetView[] = await this
             .buildAssetQuery()
             .orderBy('a.id', 'asc')
             .limit(limit)
             .offset(offset);
 
         let [{ total }] = await this.db("assets").count("* as total");
-        const totalPages = Math.ceil(Number(total) / limit);
+
+        const totalNumber = Number(total);
+        const totalPages = Math.ceil(totalNumber / limit);
 
         const assetsPagination = {
             limit,
-            total,
+            total: totalNumber,
             totalPages,
             page,
             data: assets

@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 
-import routes from "./routes";
+import assetRoutes from "./routes/asset.routes";
+import userRoutes from "./routes/user.routes";
 import { notFound } from "./middlewares/404.middleware";
 import { PORT } from "./constants";
+
+const routes = [assetRoutes, userRoutes,];
 
 const app = express();
 

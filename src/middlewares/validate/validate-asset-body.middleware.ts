@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import status from "http-status";
-import { db } from "../database/connection";
-import { assetValidator } from "../validators/asset.validator";
+import { db } from "../../database/connection";
+import { assetValidator } from "../../validators/asset.validator";
 
 const getIdByName = async (table: string, value: string): Promise<number | null> => {
 

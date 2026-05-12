@@ -8,4 +8,5 @@ export default class BaseController {
             .status(status.NOT_FOUND)
             .send({ message: `${ressource} not found` });
     }
+
 }
