@@ -59,14 +59,33 @@ Authorization: Bearer <your_token>
 
 ## Endpoints
 
-| Method | Endpoint | Auth |
-|---|---|---|
-| GET | `/assets?page=1&limit=20` | 🔒 |
-| GET | `/assets/:id` | 🔒 |
-| POST | `/assets` | 🔒 |
-| PUT | `/assets/:id` | 🔒 |
-| DELETE | `/assets/:id` | 🔒 |
-| POST | `/login` | ❌ |
+### Authentication
+
+| Method | Endpoint | Auth | Status |
+|--------|----------|------|--------|
+| ![POST](https://img.shields.io/badge/POST-green) | `/login` | ❌ | ✅ Ready |
+
+### Assets
+
+| Method | Endpoint | Auth | Status |
+|--------|----------|------|--------|
+| ![GET](https://img.shields.io/badge/GET-blue) | `/assets` | 🔒 | ✅ Ready |
+| ![GET](https://img.shields.io/badge/GET-blue) | `/assets/:id` | 🔒 | ✅ Ready |
+| ![POST](https://img.shields.io/badge/POST-green) | `/assets` | 🔒 | ✅ Ready |
+| ![PUT](https://img.shields.io/badge/PUT-orange) | `/assets/:id` | 🔒 | ✅ Ready |
+| ![DELETE](https://img.shields.io/badge/DELETE-red) | `/assets/:id` | 🔒 | ✅ Ready |
+
+Query Params: `page=1`, `limit=20`
+
+### Asset Assignments
+
+| Method | Endpoint | Auth | Status |
+|--------|----------|------|--------|
+| ![GET](https://img.shields.io/badge/GET-blue) | `/asset-assignments` | 🔒 | 🚧 WIP |
+| ![POST](https://img.shields.io/badge/POST-green) | `/asset-assignments` | 🔒 | 🚧 WIP |
+| ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/asset-assignments/:id` | 🔒 | 🚧 WIP |
+
+Query Params: `page=1`, `limit=50`
 
 ### Legend
 
@@ -107,6 +126,19 @@ Authorization: Bearer <your_token>
   "serial": "SN-DL-001-7420",
   "warrantyMonths": 36,
   "price": 1299.99
+}
+```
+
+## Asset Assignment
+
+```json
+{
+  "id": 1,
+  "assetId": 3,
+  "userId": 2,
+  "assignedAt": "2026-01-05",
+  "returnedAt": "2026-02-10",
+  "notes": "Laptop returned"
 }
 ```
 
