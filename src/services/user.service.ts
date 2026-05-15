@@ -2,8 +2,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import BaseService from "./base.service";
-import type { UserEntity } from "../types/entity/user-entity.type";
-import type { UserView } from "../types/view/user-view.type";
+import type { UserEntity } from "../types/entities/user.entity";
+import type { UserView } from "../types/views/user.view";
 
 export default class UserService extends BaseService {
 

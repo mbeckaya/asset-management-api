@@ -1,7 +1,7 @@
 import BaseService from "./base.service";
-import type { AssetEntity } from "../types/entity/asset-entity.type";
-import type { AssetView } from "../types/view/asset-view.type";
-import type { PaginationView } from "../types/view/pagination-view.type";
+import type { AssetEntity } from "../types/entities/asset.entity";
+import type { AssetView } from "../types/views/asset.view";
+import type { PaginationView } from "../types/views/pagination.view";
 
 export default class AssetService extends BaseService {
 
