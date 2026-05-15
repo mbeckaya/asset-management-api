@@ -17,6 +17,10 @@ export async function up(knex: Knex): Promise<void> {
         table.date("assigned_at").notNullable();
         table.date("returned_at");
         table.string("notes");
+
+        table.index(["asset_id", "assigned_at"], "idx_asset_assigned");
+        table.index(["user_id", "assigned_at"], "idx_user_assigned");
+        table.index(["returned_at"], "idx_returned");
     });
 }
 
