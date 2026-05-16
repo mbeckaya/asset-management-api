@@ -43,18 +43,21 @@ export default class AssetService extends BaseService {
     }
 
     async findAll(page: number, limit: number): Promise<PaginationView<AssetView[]>> {
-        const offset = (page - 1) * limit;
+        const {
+            offset,
+            totalNumber,
+            totalPages
+        } = await this.getCalcPaginationMeta(
+            page, 
+            limit,
+            "assets"
+        );
 
         const assets: AssetView[] = await this
             .buildAssetQuery()
             .orderBy('a.id', 'asc')
             .limit(limit)
             .offset(offset);
-
-        let [{ total }] = await this.db("assets").count("* as total");
-
-        const totalNumber = Number(total);
-        const totalPages = Math.ceil(totalNumber / limit);
 
         const assetsPagination = {
             limit,
@@ -85,7 +88,7 @@ export default class AssetService extends BaseService {
     async updateById(id: number, data: AssetView): Promise<boolean> {
         const affectedRows = await this
             .db("assets")
-            .where({ id })
+            .where("id", id)
             .update(this.toEntity(data));
 
         return affectedRows > 0;
