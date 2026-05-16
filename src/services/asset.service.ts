@@ -5,9 +5,11 @@ import type { PaginationView } from "../types/views/pagination.view";
 
 export default class AssetService extends BaseService {
 
+    private tableName = "assets";
+
     private buildAssetQuery() {
         return this
-            .db('assets as a')
+            .db(`${this.tableName} as a`)
             .select(
                 'a.id',
                 'b.name as brand',
@@ -50,7 +52,7 @@ export default class AssetService extends BaseService {
         } = await this.getCalcPaginationMeta(
             page, 
             limit,
-            "assets"
+            this.tableName
         );
 
         const assets: AssetView[] = await this
@@ -79,7 +81,7 @@ export default class AssetService extends BaseService {
 
     async create(data: AssetView): Promise<number> {
         const [ id ] = await this
-            .db("assets")
+            .db(this.tableName)
             .insert(this.toEntity(data));
 
         return id;
@@ -87,7 +89,7 @@ export default class AssetService extends BaseService {
 
     async updateById(id: number, data: AssetView): Promise<boolean> {
         const affectedRows = await this
-            .db("assets")
+            .db(this.tableName)
             .where("id", id)
             .update(this.toEntity(data));
 
@@ -96,7 +98,7 @@ export default class AssetService extends BaseService {
 
     async deleteById(id: number): Promise<boolean> {
         const affectedRows = await this
-            .db("assets")
+            .db(this.tableName)
             .where("id", id)
             .del();
 

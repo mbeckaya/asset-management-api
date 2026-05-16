@@ -3,7 +3,7 @@ import { Router } from "express";
 import { db } from "../database/connection";
 import UserService from "../services/user.service";
 import UserController from "../controllers/user.controller";
-import { validateLoginBody } from "../middlewares/validate/validate-login-body.middleware";
+import { validateLoginBody } from "../middlewares/validate/validate-body.middleware";
 import { API_BASE } from "../constants";
 
 const router = Router();

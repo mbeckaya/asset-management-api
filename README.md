@@ -82,7 +82,7 @@ Query Params: `page=1`, `limit=20`
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
 | ![GET](https://img.shields.io/badge/GET-blue) | `/asset-assignments` | 🔒 | ✅ Ready |
-| ![POST](https://img.shields.io/badge/POST-green) | `/asset-assignments` | 🔒 | 🚧 WIP |
+| ![POST](https://img.shields.io/badge/POST-green) | `/asset-assignments` | 🔒 | ✅ Ready |
 | ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/asset-assignments/:id` | 🔒 | 🚧 WIP |
 
 Query Params: `page=1`, `limit=50`

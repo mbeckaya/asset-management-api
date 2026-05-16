@@ -1,10 +1,10 @@
 import { Router } from "express";
 
 import { db } from "../database/connection";
-
 import AssetAssignmentService from "../services/asset-assignment.service";
 import AssetAssignmentController from "../controllers/asset-assignment.controller";
 import { validateAuth } from "../middlewares/validate/validate-auth.middleware";
+import { validateAssetAssignmentBody } from "../middlewares/validate/validate-body.middleware";
 import { API_BASE } from "../constants";
 
 const router = Router();
@@ -16,6 +16,13 @@ router.get(
     `${API_BASE}/asset-assignments`,
     validateAuth,
     assetAssignmentController.getAssetAssignments
+);
+
+router.post(
+    `${API_BASE}/asset-assignments`,
+    validateAuth,
+    validateAssetAssignmentBody,
+    assetAssignmentController.createAssetAssignments
 );
 
 export default router;

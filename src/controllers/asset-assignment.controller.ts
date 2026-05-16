@@ -18,4 +18,20 @@ export default class AssetAssignmentController extends BaseController {
 
         response.status(status.OK).send(assetAssignments);
     }
+
+    createAssetAssignments = async (request: Request, response: Response) => {
+        const assetId = Number(request.body.assetId);
+
+        const isAvailable = await this.service.isAvailableById(assetId);
+
+        if (!isAvailable) return this.getNotFound(`Open asset assignment for assetId: ${assetId}`, response);
+
+        const id = await this.service.create(request.body);
+
+        const assetAssignment = await this.service.findById(id);
+
+        if (!assetAssignment) return this.getNotFound("Asset Assignment", response);
+
+        response.status(status.CREATED).send(assetAssignment);
+    }
 }

@@ -3,35 +3,37 @@ import status from "http-status";
 import { db } from "../../database/connection";
 import { assetValidator } from "../../validators/asset.validator";
 
-const getIdByName = async (table: string, value: string): Promise<number | null> => {
-
+const getIdByName = async (
+    table: string,
+    value: string
+): Promise<number | null> => {
     const row = await db(table)
         .select("id")
         .where("name", value)
         .first();
 
-    if (!row) {
-        return null;
-    }
-
-    return row.id;
+    return row?.id ?? null;
 };
 
-const validateBody = (
-    schema: { validate: (data: unknown) => { error?: any } }
-) =>
+const validateBody =
+    (schema: { validate: (data: unknown) => { error?: any } }) =>
     async (
         request: Request,
         response: Response,
         next: NextFunction
     ) => {
+        if (!request.body) {
+            return response.status(status.BAD_REQUEST).send({
+                message: "Request body is required"
+            });
+        }
 
         const { error } = schema.validate(request.body);
 
         if (error) {
-            return response
-                .status(status.BAD_REQUEST)
-                .send({ error: error.details });
+            return response.status(status.BAD_REQUEST).send({
+                error: error.details
+            });
         }
 
         const {
@@ -41,42 +43,54 @@ const validateBody = (
             status: assetStatus
         } = request.body;
 
-        const brandId = await getIdByName("brands", brand);
+        const lookups = [
+            {
+                key: "brandId",
+                table: "brands",
+                value: brand,
+                label: "Brand"
+            },
+            {
+                key: "typeId",
+                table: "types",
+                value: type,
+                label: "Type"
+            },
+            {
+                key: "resellerId",
+                table: "resellers",
+                value: reseller,
+                label: "Reseller"
+            },
+            {
+                key: "statusId",
+                table: "statuses",
+                value: assetStatus,
+                label: "Status"
+            }
+        ];
 
-        if (!brandId) {
+        const results = await Promise.all(
+            lookups.map(({ table, value }) => getIdByName(table, value))
+        );
+
+        const failedLookupIndex = results.findIndex((id) => !id);
+
+        if (failedLookupIndex !== -1) {
+            const failedLookup = lookups[failedLookupIndex];
+
             return response.status(status.NOT_FOUND).send({
-                message: `Brand "${brand}" not found`
+                message: `${failedLookup.label} "${failedLookup.value}" not found`
             });
         }
 
-        const typeId = await getIdByName("types", type);
-
-        if (!typeId) {
-            return response.status(status.NOT_FOUND).send({
-                message: `Type "${type}" not found`
-            });
-        }
-
-        const resellerId = await getIdByName("resellers", reseller);
-
-        if (!resellerId) {
-            return response.status(status.NOT_FOUND).send({
-                message: `Reseller "${reseller}" not found`
-            });
-        }
-
-        const statusId = await getIdByName("statuses", assetStatus);
-
-        if (!statusId) {
-            return response.status(status.NOT_FOUND).send({
-                message: `Status "${assetStatus}" not found`
-            });
-        }
-
-        request.body.brandId = brandId;
-        request.body.typeId = typeId;
-        request.body.resellerId = resellerId;
-        request.body.statusId = statusId;
+        request.body = {
+            ...request.body,
+            brandId: results[0],
+            typeId: results[1],
+            resellerId: results[2],
+            statusId: results[3]
+        };
 
         next();
     };
