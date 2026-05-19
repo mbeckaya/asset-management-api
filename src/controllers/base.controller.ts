@@ -3,10 +3,10 @@ import status from "http-status";
 
 export default class BaseController {
 
-    getNotFound(ressource: string, response: Response) {
+    getNotFound(resource: string, response: Response, suffix  = 'not found') {
         return response
             .status(status.NOT_FOUND)
-            .send({ message: `${ressource} not found` });
+            .send({ message: `${resource} ${suffix}` });
     }
 
 }

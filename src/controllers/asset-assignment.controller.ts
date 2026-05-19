@@ -34,4 +34,21 @@ export default class AssetAssignmentController extends BaseController {
 
         response.status(status.CREATED).send(assetAssignment);
     }
+
+    updateAssetAssignmentById = async (request: Request, response: Response) => {
+        const id = Number(request.params.id);
+
+        const isUpdated = await this.service.updateById(id, request.body);
+
+        if (!isUpdated) {
+            return this.getNotFound(
+                `Asset assignment with id ${id}`,
+                response,
+                'not found, already returned, or invalid return date'
+            );
+        }
+        const assetUpdated = await this.service.findById(id);
+
+        response.status(status.OK).send(assetUpdated);
+    }
 }

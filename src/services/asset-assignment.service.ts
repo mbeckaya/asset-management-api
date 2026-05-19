@@ -88,5 +88,16 @@ export default class AssetAssignmentService extends BaseService {
 
         return id;
     }
+    
+    async updateById(id: number, data: { returnedAt: string }): Promise<boolean> {
+        const affectedRows = await this
+            .db(this.tableName)
+            .where("id", id)
+            .where("assigned_at", "<=", data.returnedAt)
+            .whereNull("returned_at")
+            .update({ returned_at: data.returnedAt });
+
+        return affectedRows > 0;
+    }
 
 }

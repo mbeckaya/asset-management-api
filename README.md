@@ -20,7 +20,7 @@ System for managing company IT assets such as laptops, monitors, and other hardw
 |---|---|---|
 | Asset CRUD API | ✅ Done | Core |
 | JWT Authentication | ✅ Done | Core |
-| Asset Assignment | 🚧 In Progress | Core |
+| Asset Assignment | ✅ Done | Core |
 | Asset Status Management | ⏳ Planned | Core |
 | Docker Setup | ⏳ Planned | Infrastructure |
 | Asset Filtering & Search | ⏳ Planned | Optional |
@@ -83,7 +83,7 @@ Query Params: `page=1`, `limit=20`
 |--------|----------|------|--------|
 | ![GET](https://img.shields.io/badge/GET-blue) | `/asset-assignments` | 🔒 | ✅ Ready |
 | ![POST](https://img.shields.io/badge/POST-green) | `/asset-assignments` | 🔒 | ✅ Ready |
-| ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/asset-assignments/:id` | 🔒 | 🚧 WIP |
+| ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/asset-assignments/:id` | 🔒 | ✅ Ready |
 
 Query Params: `page=1`, `limit=50`
 
