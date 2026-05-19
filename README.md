@@ -120,7 +120,6 @@ Query Params: `page=1`, `limit=50`
   "brand": "Lenovo",
   "type": "Laptop",
   "reseller": "Amazon",
-  "status": "In Use",
   "purchasedAt": "2025-03-01",
   "model": "Thinkpad 7420",
   "serial": "SN-DL-001-7420",

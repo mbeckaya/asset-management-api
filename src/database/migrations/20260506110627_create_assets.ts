@@ -18,11 +18,6 @@ export async function up(knex: Knex): Promise<void> {
             .unsigned()
             .references("id")
             .inTable("resellers");
-        table
-            .integer("status_id")
-            .unsigned()
-            .references("id")
-            .inTable("statuses");
         table.date("purchased_at").notNullable();
         table.string("model", 100).notNullable();
         table.string("serial", 100).notNullable();

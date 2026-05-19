@@ -39,8 +39,7 @@ const validateBody =
         const {
             brand,
             type,
-            reseller,
-            status: assetStatus
+            reseller
         } = request.body;
 
         const lookups = [
@@ -61,12 +60,6 @@ const validateBody =
                 table: "resellers",
                 value: reseller,
                 label: "Reseller"
-            },
-            {
-                key: "statusId",
-                table: "statuses",
-                value: assetStatus,
-                label: "Status"
             }
         ];
 
@@ -88,8 +81,7 @@ const validateBody =
             ...request.body,
             brandId: results[0],
             typeId: results[1],
-            resellerId: results[2],
-            statusId: results[3]
+            resellerId: results[2]
         };
 
         next();

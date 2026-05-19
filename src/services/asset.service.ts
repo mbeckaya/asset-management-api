@@ -15,7 +15,6 @@ export default class AssetService extends BaseService {
                 'b.name as brand',
                 't.name as type',
                 'r.name as reseller',
-                's.name as status',
                 this.db.raw(`
                     DATE_FORMAT(a.purchased_at, '%Y-%m-%d') AS purchasedAt
                 `),
@@ -27,7 +26,6 @@ export default class AssetService extends BaseService {
             .innerJoin('brands as b', 'a.brand_id', 'b.id')
             .innerJoin('types as t', 'a.type_id', 't.id')
             .innerJoin('resellers as r', 'a.reseller_id', 'r.id')
-            .innerJoin('statuses as s', 'a.status_id', 's.id');
     }
 
     private toEntity(data: AssetView): AssetEntity {
@@ -35,7 +33,6 @@ export default class AssetService extends BaseService {
             brand_id: data.brandId!,
             type_id: data.typeId!,
             reseller_id: data.resellerId!,
-            status_id: data.statusId!,
             purchased_at: data.purchasedAt,
             model: data.model,
             serial: data.serial,

@@ -7,5 +7,4 @@ export async function seed(knex: Knex): Promise<void> {
     await knex("brands").del();
     await knex("types").del();
     await knex("resellers").del();
-    await knex("statuses").del();
 };
