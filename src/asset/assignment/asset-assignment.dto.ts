@@ -1,4 +1,4 @@
-export interface AssetAssignmentView {
+export interface AssetAssignmentDto {
     assetId: number;
     userId: number;
     assignedAt: string;

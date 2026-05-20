@@ -1,7 +1,7 @@
-import BaseService from "./base.service";
-import type { AssetEntity } from "../types/entities/asset.entity";
-import type { AssetView } from "../types/views/asset.view";
-import type { PaginationView } from "../types/views/pagination.view";
+import BaseService from "../shared/base.service";
+import type { AssetRecord } from "./asset.record";
+import type { AssetDto } from "./asset.dto";
+import type { PaginationDto } from "../shared/pagination.dto";
 
 export default class AssetService extends BaseService {
 
@@ -28,7 +28,7 @@ export default class AssetService extends BaseService {
             .innerJoin('resellers as r', 'a.reseller_id', 'r.id')
     }
 
-    private toEntity(data: AssetView): AssetEntity {
+    private toEntity(data: AssetDto): AssetRecord {
         return {
             brand_id: data.brandId!,
             type_id: data.typeId!,
@@ -41,7 +41,7 @@ export default class AssetService extends BaseService {
         };
     }
 
-    async findAll(page: number, limit: number): Promise<PaginationView<AssetView[]>> {
+    async findAll(page: number, limit: number): Promise<PaginationDto<AssetDto[]>> {
         const {
             offset,
             totalNumber,
@@ -52,7 +52,7 @@ export default class AssetService extends BaseService {
             this.tableName
         );
 
-        const assets: AssetView[] = await this
+        const assets: AssetDto[] = await this
             .buildAssetQuery()
             .orderBy('a.id', 'asc')
             .limit(limit)
@@ -69,14 +69,14 @@ export default class AssetService extends BaseService {
         return assetsPagination;
     }
 
-    async findById(id: number): Promise<AssetView | undefined> {
+    async findById(id: number): Promise<AssetDto | undefined> {
         return this
             .buildAssetQuery()
             .where("a.id", id)
             .first();
     }
 
-    async create(data: AssetView): Promise<number> {
+    async create(data: AssetDto): Promise<number> {
         const [ id ] = await this
             .db(this.tableName)
             .insert(this.toEntity(data));
@@ -84,7 +84,7 @@ export default class AssetService extends BaseService {
         return id;
     }
 
-    async updateById(id: number, data: AssetView): Promise<boolean> {
+    async updateById(id: number, data: AssetDto): Promise<boolean> {
         const affectedRows = await this
             .db(this.tableName)
             .where("id", id)

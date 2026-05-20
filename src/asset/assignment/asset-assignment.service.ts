@@ -1,8 +1,7 @@
-import BaseService from "./base.service";
-
-import type { AssetAssignmentEntity } from "../types/entities/asset-assignment.entity";
-import type { AssetAssignmentView } from "../types/views/asset-assignment.view";
-import type { PaginationView } from "../types/views/pagination.view";
+import BaseService from "../../shared/base.service";
+import type { AssetAssignmentRecord } from "./asset-assignment.record";
+import type { AssetAssignmentDto } from "./asset-assignment.dto";
+import type { PaginationDto } from "../../shared/pagination.dto";
 
 export default class AssetAssignmentService extends BaseService {
 
@@ -25,7 +24,7 @@ export default class AssetAssignmentService extends BaseService {
             );
     }
 
-    private toEntity(data: AssetAssignmentView): AssetAssignmentEntity {
+    private toEntity(data: AssetAssignmentDto): AssetAssignmentRecord {
         return {
             asset_id: data.assetId,
             user_id: data.userId,
@@ -35,7 +34,7 @@ export default class AssetAssignmentService extends BaseService {
         };
     }
 
-    async findAll(page: number, limit: number): Promise<PaginationView<AssetAssignmentView[]>> {
+    async findAll(page: number, limit: number): Promise<PaginationDto<AssetAssignmentDto[]>> {
         const {
             offset,
             totalNumber,
@@ -46,7 +45,7 @@ export default class AssetAssignmentService extends BaseService {
             this.tableName
         );
         
-        const assetAssignments: AssetAssignmentView[] = await this
+        const assetAssignments: AssetAssignmentDto[] = await this
             .buildAssetAssignmentQuery()
             .limit(limit)
             .offset(offset);
@@ -62,8 +61,8 @@ export default class AssetAssignmentService extends BaseService {
         return assetAssignmentsPagination;
     }
 
-    async findById(id: number): Promise<AssetAssignmentView> {
-        const assetAssignment: AssetAssignmentView = await this
+    async findById(id: number): Promise<AssetAssignmentDto> {
+        const assetAssignment: AssetAssignmentDto = await this
             .buildAssetAssignmentQuery()
             .where("id", id)
             .first();
@@ -81,7 +80,7 @@ export default class AssetAssignmentService extends BaseService {
         return !activeAssignmentExists;
     }
 
-    async create(data: AssetAssignmentView): Promise<number> {
+    async create(data: AssetAssignmentDto): Promise<number> {
         const [ id ] = await this
             .db(this.tableName)
             .insert(this.toEntity(data));

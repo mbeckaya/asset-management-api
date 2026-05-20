@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import status from "http-status";
-import { loginValidator } from "../../validators/login.validator";
-import { assetAssignmentValidator } from "../../validators/asset-assignment.validator";
+import { userLoginValidator } from "../../user/user-login.validator";
+import { assetAssignmentValidator } from "../../asset/assignment/asset-assignment.validator";
 
 const createBodyValidator = (validator: { validate: (body: unknown) => { error?: any } }) => {
     return (request: Request, response: Response, next: NextFunction) => {
@@ -17,6 +17,6 @@ const createBodyValidator = (validator: { validate: (body: unknown) => { error?:
     };
 };
 
-export const validateLoginBody = createBodyValidator(loginValidator);
+export const validateLoginBody = createBodyValidator(userLoginValidator);
 
 export const validateAssetAssignmentBody = createBodyValidator(assetAssignmentValidator);

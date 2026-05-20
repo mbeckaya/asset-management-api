@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 
-import assetRoutes from "./routes/asset.routes";
-import userRoutes from "./routes/user.routes";
-import assetAssignmentRoutes from "./routes/asset-assignment.routes";
-import { notFound } from "./middlewares/404.middleware";
-import { PORT } from "./constants";
+import assetRoutes from "./asset/asset.routes";
+import assetAssignmentRoutes from "./asset/assignment/asset-assignment.routes";
+import userRoutes from "./user/user.routes";
+import { notFound } from "./shared/middlewares/404.middleware";
+import { PORT } from "./shared/constants";
 
 const routes = [assetRoutes, userRoutes, assetAssignmentRoutes,];
 

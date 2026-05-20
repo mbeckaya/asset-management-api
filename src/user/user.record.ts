@@ -1,4 +1,4 @@
-export interface UserEntity {
+export interface UserRecord {
     id: number;
     email: string;
     password: string;

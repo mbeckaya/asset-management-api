@@ -1,4 +1,4 @@
-export interface AssetAssignmentEntity {
+export interface AssetAssignmentRecord {
     asset_id: number;
     user_id: number;
     assigned_at: string;

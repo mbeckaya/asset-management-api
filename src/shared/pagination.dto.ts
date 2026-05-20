@@ -1,4 +1,4 @@
-export interface PaginationView<T> {
+export interface PaginationDto<T> {
     limit: number;
     total: number;
     totalPages: number;

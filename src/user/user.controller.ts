@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import status from "http-status";
 
-import BaseController from "./base.controller";
-import UserService from "../services/user.service";
+import BaseController from "../shared/base.controller";
+import UserService from "./user.service";
 
 export default class UserController extends BaseController {
 

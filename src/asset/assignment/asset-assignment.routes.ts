@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { db } from "../database/connection";
-import AssetAssignmentService from "../services/asset-assignment.service";
-import AssetAssignmentController from "../controllers/asset-assignment.controller";
-import { validateAuth } from "../middlewares/validate/validate-auth.middleware";
-import { validateId } from "../middlewares/validate/validate-id.middleware";
-import { validateAssetAssignmentBody } from "../middlewares/validate/validate-body.middleware";
-import { API_BASE } from "../constants";
+import { db } from "../../shared/database";
+import AssetAssignmentService from "./asset-assignment.service";
+import AssetAssignmentController from "./asset-assignment.controller";
+import { validateAuth } from "../../shared/middlewares/auth.middleware";
+import { validateId } from "../../shared/middlewares/id.middleware";
+import { validateAssetAssignmentBody } from "../../shared/middlewares/body.middleware";
+import { API_BASE } from "../../shared/constants";
 
 const router = Router();
 

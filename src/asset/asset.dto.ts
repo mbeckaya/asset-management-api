@@ -1,4 +1,4 @@
-export interface AssetView {
+export interface AssetDto {
   id: number;
   brand: string;
   type: string;

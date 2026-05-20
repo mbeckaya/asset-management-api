@@ -1,4 +1,4 @@
-export interface AssetEntity {
+export interface AssetRecord {
   brand_id: number;
   type_id: number;
   reseller_id: number;
