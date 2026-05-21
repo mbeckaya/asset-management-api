@@ -69,23 +69,26 @@ Authorization: Bearer <your_token>
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| ![GET](https://img.shields.io/badge/GET-blue) | `/assets` | 🔒 | ✅ Ready |
+| ![GET](https://img.shields.io/badge/GET-blue) | `/assets?page=1&limit=20` | 🔒 | ✅ Ready |
 | ![GET](https://img.shields.io/badge/GET-blue) | `/assets/:id` | 🔒 | ✅ Ready |
 | ![POST](https://img.shields.io/badge/POST-green) | `/assets` | 🔒 | ✅ Ready |
 | ![PUT](https://img.shields.io/badge/PUT-orange) | `/assets/:id` | 🔒 | ✅ Ready |
 | ![DELETE](https://img.shields.io/badge/DELETE-red) | `/assets/:id` | 🔒 | ✅ Ready |
 
-Query Params: `page=1`, `limit=20`
-
 ### Asset Assignments
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| ![GET](https://img.shields.io/badge/GET-blue) | `/asset-assignments` | 🔒 | ✅ Ready |
+| ![GET](https://img.shields.io/badge/GET-blue) | `/asset-assignments?page=1&limit=50` | 🔒 | ✅ Ready |
 | ![POST](https://img.shields.io/badge/POST-green) | `/asset-assignments` | 🔒 | ✅ Ready |
 | ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/asset-assignments/:id` | 🔒 | ✅ Ready |
 
-Query Params: `page=1`, `limit=50`
+### Asset Status Management
+
+| Method | Endpoint | Auth | Status |
+|--------|----------|------|--------|
+| ![PATCH](https://img.shields.io/badge/PATCH-yellow) | `/assets/:id/status` | 🔒 | 🚧 In Progress |
+| ![GET](https://img.shields.io/badge/GET-blue) | `/asset-statuses?assetId=:id` | 🔒 | 🚧 In Progress |
 
 ### Legend
 
